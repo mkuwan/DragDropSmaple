@@ -151,5 +151,59 @@
                      dd:DragDrop.IsDropTarget="True"
                      dd:DragDrop.DropHandler="{Binding SampleData.TextBoxCustomDropHandler}"/>
         </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1"
+                       Text="Target ListBox内のGridCustomDropHandler"
+                       Margin="20,0,0,0"
+                       VerticalAlignment="Bottom"/>
+            <ListBox Grid.Row="2"
+                     Margin="20,0"
+                     BorderThickness="1"
+                     BorderBrush="DimGray"
+                     ItemsSource="{Binding SampleData2.SampleLists}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid dd:DragDrop.IsDropTarget="{Binding IsDropTarget}"
+                              dd:DragDrop.IsDragSource="{Binding IsDragSource}"
+                              dd:DragDrop.DropHandler="{Binding GridCustomDropHandler}">
+                            <dd:DragDrop.DragAdornerTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="0.3"
+                                            BorderBrush="Blue"
+                                            Padding="10,2"
+                                            Background="AliceBlue">
+                                        <TextBlock Text="{Binding SampleText}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </dd:DragDrop.DragAdornerTemplate>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="240"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="Number"
+                                       Grid.Column="0"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Number}"/>
+                            <TextBlock x:Name="SampleId"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding SampleId}"/>
+                            <TextBlock x:Name="SampleText"
+                                           Grid.Column="2"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding SampleText}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
     </Grid>
 </Window>
